@@ -22,9 +22,12 @@ evidence, decide a status, and write your findings back into the audit.
 - **Decide how to verify each criterion yourself.** Most criteria are judgement
   calls no scanner can settle. Pick the cheapest sufficient evidence.
 - **Never invent evidence.** If you cannot verify a criterion with the tools you
-  have, leave it `Not tested` and say so, rather than guessing a status.
+  have, mark it `Needs Review` with the reason — never guess `Success`. Do NOT
+  leave it `Not tested`: that is the "untouched" state and the loop will keep
+  handing it back to you. `Needs Review` records "I looked, a human must finish".
 - **You augment humans, you never overwrite them.** Writes only land on a
-  criterion still marked `Not tested`; an existing verdict is protected.
+  criterion still marked `Not tested`; an existing verdict (including a
+  `Needs Review` you set) is protected.
 
 ## The loop
 
@@ -44,12 +47,19 @@ Work one sample at a time, one criterion at a time:
      real browser and exercise the page. Do not rely on the scanner for these.
    - **Editorial / judgement checks** (link relevance, meaningful alternatives,
      content order, consistent navigation): reason over the rendered content.
-4. Decide a status: `Success` | `Failure` | `N/A` | `Derogation`. For
-   `Failure`/`Derogation`, set `user_impact` (`low` | `disturbing` | `blocking`).
+4. Decide a status: `Success` | `Failure` | `N/A` | `Derogation` |
+   `Needs Review`. Use `Needs Review` when you genuinely tested but could not
+   conclude with the evidence available (blocked by auth, dynamic state you
+   can't reach, ambiguous requirement) — it is honest and keeps the loop moving.
+   For `Failure`/`Derogation`, set `user_impact` (`low` | `disturbing` |
+   `blocking`).
 5. `update_criterion` with:
-   - `problem` — what fails and where (selectors, snippets, which test of the
-     criterion), concrete enough for a developer to locate it.
-   - `solution` — how to fix it, with a short corrected code sample when useful.
+   - `problem` — for `Failure`/`Derogation`, what fails and where (selectors,
+     snippets, which test of the criterion), concrete enough for a developer to
+     locate it; for `Needs Review`, the reason you couldn't conclude and what a
+     human should check.
+   - `solution` — how to fix it, with a short corrected code sample when useful
+     (`Failure`/`Derogation` only).
 6. Repeat. If a write returns `WRITE_GUARD`, that criterion was already decided
    by a human — skip it and continue.
 
@@ -60,7 +70,9 @@ Work one sample at a time, one criterion at a time:
 `criterion_id`, `source` (`axe` | `checkfox`), and `needs_review`
 (CheckFox judgement findings you must confirm, never auto-apply). Treat it as one
 input to your decision — then still call `update_criterion` yourself with your
-own findings and solution.
+own findings and solution. A `needs_review` mapping you inspect but cannot
+confirm maps naturally to the `Needs Review` status: same idea — flagged, not
+concluded.
 
 ## Running several agents in parallel
 

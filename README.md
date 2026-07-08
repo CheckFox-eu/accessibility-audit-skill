@@ -9,6 +9,11 @@ evidence (source analysis, a real browser, or CheckFox's automated scanner),
 decides a status, and writes the findings and a suggested fix back into a CheckFox
 audit. CheckFox is the read-and-write substrate; the agent is the auditor.
 
+When the agent tests a criterion but cannot confidently conclude — blocked by
+authentication, an unreachable dynamic state, or an ambiguous requirement — it
+marks the criterion **Needs Review** for a human rather than guessing a pass. So
+the audit never records a false success, and the audit loop always terminates.
+
 ## What's in here
 
 - [`SKILL.md`](./SKILL.md) — the skill itself: golden rules, the audit loop,
