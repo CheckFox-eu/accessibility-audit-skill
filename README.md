@@ -55,7 +55,7 @@ referential are served **in French** straight from the MCP server — append
 `?lang=fr` to any resource URI (e.g. `checkfox://skill/audit?lang=fr`,
 `checkfox://criteria/rgaa?lang=fr`).
 
-## Built on Geoffrey Crofte's accessibility expertise
+## Built on an existing accessibility expertise
 
 The methodology this skill drives reflects the accessibility expertise of
 [Geoffrey Crofte](https://github.com/geoffreycrofte). For a vendor-neutral,
