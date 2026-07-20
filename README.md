@@ -2,7 +2,7 @@
 
 An agent skill that lets an AI agent run a real web accessibility audit against
 **RGAA**, **RAWeb**, and **WCAG** — one criterion at a time — through the
-[CheckFox](https://checkfox.eu) Audit Engine over the Model Context Protocol (MCP).
+[CheckFox](https://checkfox.eu/link/github-md) Audit Engine over the Model Context Protocol (MCP).
 
 The agent reads each criterion's official methodology and tests, gathers its own
 evidence (source analysis, a real browser, or CheckFox's automated scanner),
@@ -23,7 +23,7 @@ the audit never records a false success, and the audit loop always terminates.
 
 ## Requirements
 
-- A [CheckFox](https://checkfox.eu) account with at least one audit.
+- A [CheckFox](https://checkfox.eu/link/github-md) account with at least one audit.
 - Access to the CheckFox MCP server, via **either**:
   - the **native OAuth connector** (Claude on the web / Desktop — no key to
     manage), or
@@ -72,4 +72,4 @@ surface. When the server's tools change, this file is updated to match.
 ## Learn more
 
 - CheckFox MCP guide: <https://checkfox.eu/mcp>
-- CheckFox: <https://checkfox.eu>
+- CheckFox: [CheckFox.eu](https://checkfox.eu/link/github-md)
